@@ -11,9 +11,10 @@ def build_tree_data(root, prev_dict = None):
     dictionary['name'] = root.name
     prev_url = prev_dict.get('url', '')
     dictionary['url'] = "/".join([prev_url, root.name])
-    if root.childs.all().exists():
+    root_childs = root.childs.all()
+    if root_childs:
         dictionary['childs'] = []
-        for child in root.childs.all():
+        for child in root_childs:
             dictionary['childs'].append(build_tree_data(child, dictionary))
     # print(dictionary)
     return dictionary
