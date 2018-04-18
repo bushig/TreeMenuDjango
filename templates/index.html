@@ -1,0 +1,52 @@
+{% load tree_menu %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+    <style type="text/css">
+        #tree ul {
+            list-style: none;
+        }
+
+        #tree .node {
+            color: red;
+            background-position: left center;
+            background-repeat: no-repeat;
+            padding-left: 12px;
+            cursor: pointer;
+        }
+
+        #tree .open {
+            display: inline !important;
+        }
+
+        #tree ul li {
+            padding-left: 20px;
+            margin-left: -42px;
+        }
+    </style>
+
+</head>
+<body>
+<div id="tree">
+<ul>
+    {% tree_menu 'main_menu' %}
+</ul>
+    </div>
+</body>
+<script>
+    (function() {
+   var treePaneNodes = $('#tree').find(".node");
+  treePaneNodes.next("ul").hide();
+  $('#tree').find(".open").next("ul").show();;
+  treePaneNodes.on('click', function() {
+   $(this).next("ul").first().toggle();
+   $(this).toggleClass("open");
+  })
+ })();
+</script>
+</html>

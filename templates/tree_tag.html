@@ -1,0 +1,17 @@
+{% for item in tree %}
+    <li><a href="{{ item.url }}" class="node {% if item.name in paths %} open{% endif %}">{{ item.name }}</a>
+    {% if item.childs %}
+        <ul>
+    {% for child in item.childs %}
+        <li><a href="{{ child.url }}" class="node {% if child.name in paths %} open{% endif %}">{{ child.name }}</a>
+        {% if child.childs %}
+        <ul>
+        {% include "tree_tag.html" with tree=child.childs paths=paths  %}
+        </ul>
+            </li>
+        {% endif %}
+    {% endfor %}
+        </ul>
+    {% endif %}
+    </li>
+{% endfor %}
