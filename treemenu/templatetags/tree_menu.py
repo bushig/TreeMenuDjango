@@ -22,7 +22,7 @@ def build_tree_data(root, prev_dict = None):
 @register.inclusion_tag('tree_tag.html', takes_context=True)
 def tree_menu(context, name):
     url = context['request'].path
-    menu = Menu.objects.get(name=name)
+    menu = Menu.objects.select_related('root_item').get(name=name)
     root = menu.root_item
     dictionary = [build_tree_data(root)]
     print(dictionary)
